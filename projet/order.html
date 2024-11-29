@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande - Produit IT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header bg-dark text-white text-center py-3">
+        <h1>Commander votre produit IT</h1>
+    </header>
+    <main class="container mt-4">
+        <div id="product-details" class="row">
+            <!-- Les détails du produit seront insérés ici dynamiquement -->
+        </div>
+        <hr>
+        <div id="delivery-options" class="mt-4">
+            <h2>Évaluer les options de livraison</h2>
+            <form id="delivery-form">
+                <div class="mb-3">
+                    <label for="postal-code" class="form-label">Entrez votre code postal :</label>
+                    <input type="text" class="form-control" id="postal-code" placeholder="Ex : 75001">
+                </div>
+                <button type="button" id="check-delivery" class="btn btn-primary">Vérifier</button>
+            </form>
+            <div id="delivery-result" class="mt-3">
+                <!-- Les résultats de la livraison apparaîtront ici -->
+            </div>
+        </div>
+    </main>
+    <script src="order.js"></script>
+</body>
+</html>
