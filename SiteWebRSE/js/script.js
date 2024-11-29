@@ -10,11 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Modes de transport avec empreintes carbone (gCO2/km) et vitesses moyennes (km/h)
     const modes = [
         { type: "Camionnette", carbone: 200, vitesse: 50 },
-        { type: "Moto", carbone: 100, vitesse: 60 },
-        { type: "Vélo", carbone: 20, vitesse: 20 },
+        { type: "Moto", carbone: 87, vitesse: 60 },
+        { type: "Vélo", carbone: 0, vitesse: 20 },
         { type: "Robot autonome", carbone: 30, vitesse: 15 },
-        { type: "Piéton", carbone: 5, vitesse: 5 },
-        { type: "Drone", carbone: 50, vitesse: 70 },
+        { type: "Piéton", carbone: 0, vitesse: 5 },
+        { type: "Drone", carbone: 20, vitesse: 70 },
     ];
 
     const transportContainer = document.getElementById("modes-transport");
@@ -57,36 +57,73 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
 
-    async function afficherModesTransport() {
-        transportContainer.innerHTML = "<p>Calcul en cours...</p>";
-    
-        const adresseClient = document.getElementById("adresse").value;
-        const centreDepart = centres[document.getElementById("depart").value];
-    
-        try {
-            const { distance, duree } = await calculerDistances(adresseClient, centreDepart);
-    
-            transportContainer.innerHTML = ""; // Efface l'ancien contenu
-            modes.forEach((mode) => {
-                const temps = (distance / mode.vitesse).toFixed(2); // en heures
-                const carbone = (mode.carbone * distance).toFixed(2); // en gCO₂
-                const element = document.createElement("div");
-                element.className = "mode-transport";
-                element.innerHTML = `
-                    <label>
-                        <input type="radio" name="transport" value="${mode.type}">
-                        <strong>${mode.type}</strong><br>
-                        Distance : <span>${distance.toFixed(2)}</span> km<br>
-                        Empreinte carbone : <span>${carbone}</span> gCO₂<br>
-                        Temps estimé : <span>${temps}</span> heures
-                    </label>
-                `;
-                transportContainer.appendChild(element);
-            });
-        } catch (error) {
-            transportContainer.innerHTML = `<p>Erreur : ${error.message}</p>`;
-        }
+async function afficherModesTransport() {
+    transportContainer.innerHTML = "<p>Calcul en cours...</p>";
+
+    const adresseClient = document.getElementById("adresse").value;
+    const centreDepart = centres[document.getElementById("depart").value];
+
+    try {
+        const { distance, duree } = await calculerDistances(adresseClient, centreDepart);
+
+        transportContainer.innerHTML = ""; // Efface l'ancien contenu
+        modes.forEach((mode) => {
+            const tempsTotalHeures = distance / mode.vitesse; // Temps total en heures
+            const heures = Math.floor(tempsTotalHeures); // Partie entière en heures
+            const minutes = Math.round((tempsTotalHeures - heures) * 60); // Partie fractionnaire convertie en minutes
+            const carbone = (mode.carbone * distance).toFixed(2); // en gCO₂
+
+            const element = document.createElement("div");
+            element.className = "mode-transport";
+            element.innerHTML = `
+                <label>
+                    <input type="radio" name="transport" value="${mode.type}">
+                    <strong>${mode.type}</strong><br>
+                    Distance : <span>${distance.toFixed(2)}</span> km<br>
+                    Empreinte carbone : <span>${carbone}</span> gCO₂<br>
+                    Temps estimé : <span>${heures} heures ${minutes} minutes</span>
+                </label>
+            `;
+            transportContainer.appendChild(element);
+        });
+    } catch (error) {
+        transportContainer.innerHTML = `<p>Erreur : ${error.message}</p>`;
     }
+}
+async function afficherModesTransport() {
+    transportContainer.innerHTML = "<p>Calcul en cours...</p>";
+
+    const adresseClient = document.getElementById("adresse").value;
+    const centreDepart = centres[document.getElementById("depart").value];
+
+    try {
+        const { distance, duree } = await calculerDistances(adresseClient, centreDepart);
+
+        transportContainer.innerHTML = ""; // Efface l'ancien contenu
+        modes.forEach((mode) => {
+            const tempsTotalHeures = distance / mode.vitesse; // Temps total en heures
+            const heures = Math.floor(tempsTotalHeures); // Partie entière en heures
+            const minutes = Math.round((tempsTotalHeures - heures) * 60); // Partie fractionnaire convertie en minutes
+            const carbone = (mode.carbone * distance).toFixed(2); // en gCO₂
+
+            const element = document.createElement("div");
+            element.className = "mode-transport";
+            element.innerHTML = `
+                <label>
+                    <input type="radio" name="transport" value="${mode.type}">
+                    <strong>${mode.type}</strong><br>
+                    Distance : <span>${distance.toFixed(2)}</span> km<br>
+                    Empreinte carbone : <span>${carbone}</span> gCO₂<br>
+                    Temps estimé : <span>${heures} heures ${minutes} minutes</span>
+                </label>
+            `;
+            transportContainer.appendChild(element);
+        });
+    } catch (error) {
+        transportContainer.innerHTML = `<p>Erreur : ${error.message}</p>`;
+    }
+}
+
     
 
     // Afficher les modes de transport lorsque le formulaire est soumis
