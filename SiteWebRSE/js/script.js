@@ -68,6 +68,22 @@ async function afficherModesTransport() {
 
         transportContainer.innerHTML = ""; // Efface l'ancien contenu
         modes.forEach((mode) => {
+            // Appliquer des conditions pour exclure certains modes de transport
+            if (mode.type === "Piéton" && distance > 5) {
+                return; // Ignore le mode Piéton si la distance > 5 km
+            }
+            if (mode.type === "Vélo" && distance > 10) {
+                return; // Ignore le mode Vélo si la distance > 10 km
+            }
+            if (mode.type === "Robot autonome" && distance > 7) {
+                return; // Ignore le mode Robot autonome si la distance > 7 km
+            }
+            if (mode.type === "Drone" && distance > 20) {
+                return; // Ignore le mode Drone si la distance > 20 km
+            }
+            if (mode.type === "Moto" && distance > 70) {
+                return; // Ignore le mode Moto si la distance > 70 km
+            }
             const tempsTotalHeures = distance / mode.vitesse; // Temps total en heures
             const heures = Math.floor(tempsTotalHeures); // Partie entière en heures
             const minutes = Math.round((tempsTotalHeures - heures) * 60); // Partie fractionnaire convertie en minutes
@@ -101,6 +117,22 @@ async function afficherModesTransport() {
 
         transportContainer.innerHTML = ""; // Efface l'ancien contenu
         modes.forEach((mode) => {
+            // Appliquer des conditions pour exclure certains modes de transport
+            if (mode.type === "Piéton" && distance > 5) {
+                return; // Ignore le mode Piéton si la distance > 5 km
+            }
+            if (mode.type === "Vélo" && distance > 10) {
+                return; // Ignore le mode Vélo si la distance > 10 km
+            }
+            if (mode.type === "Robot autonome" && distance > 7) {
+                return; // Ignore le mode Robot autonome si la distance > 7 km
+            }
+            if (mode.type === "Drone" && distance > 20) {
+                return; // Ignore le mode Drone si la distance > 20 km
+            }
+            if (mode.type === "Moto" && distance > 70) {
+                return; // Ignore le mode Moto si la distance > 70 km
+            }
             const tempsTotalHeures = distance / mode.vitesse; // Temps total en heures
             const heures = Math.floor(tempsTotalHeures); // Partie entière en heures
             const minutes = Math.round((tempsTotalHeures - heures) * 60); // Partie fractionnaire convertie en minutes
