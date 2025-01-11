@@ -9,6 +9,7 @@ https://m.media-amazon.com/images/G/31/gno/sprites/nav-sprite-global-1x-hm-dsk-r
 body {
     margin: 0;
     font-family: "Amazon Ember",Arial,sans-serif;
+    position: relative;
 }
 
 .header {
@@ -562,4 +563,50 @@ body {
     border: none;
     outline: none;
     background-color: rgb(255,255,255,0.4);
+}
+/* Merging style from matthew */
+livraison-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.mode-transport {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 10px 0;
+    border-radius: 5px;
+    line-height: 1.5em;
+}
+.mode-transport label {
+    display: block;
+}
+button {
+    display: inline-block;
+    background: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #0056b3;
+}
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 20px;
+    bottom: 0;
+    position: fixed
+}
+
+.modes-transport{
+    display: grid;
+    justify-items: center;
+}
+
+.form-titles{
+    text-align: center;
 }

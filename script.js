@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const API_KEY = "CLE_GOOGLE"; // Remplacez par votre clé API Google Maps.
+    const API_KEY = "AIzaSyBUb7Ee7AkGvlY75uxBxTGecHCpDoaaZok"; // Remplacez par votre clé API Google Maps.
 
     // Adresses des centres de départ
     const centres = {
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Calcul de la distance entre le centre de départ et l'adresse du client
             const { distance, duree } = await calculerDistances(adresseClient, centreDepart);
     
-            transportContainer.innerHTML = ""; // Efface l'ancien contenu
+            transportContainer.innerHTML = "<h3>Modes de transport :</h3>"; // Efface l'ancien contenu
     
             // Vérifier si la distance dépasse 80 km
             if (distance > 80) {
