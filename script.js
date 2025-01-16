@@ -110,20 +110,30 @@ document.addEventListener("DOMContentLoaded", function () {
     
                     const tempsDernierKmHeures = distanceDernierKm.distance / mode.vitesse;
                     const heures = Math.floor(tempsDernierKmHeures);
-                    const minutes = Math.round((tempsDernierKmHeures - heures) * 60);
+                    
+                    //Si le temps est inférieur à 24, on affiche seulement les jours estimés
+                    if (heures <= 24){
+                        const timeEstimated = `Temps estimé : <span>1 jour</span> </label>`;
+                    }else if(heures >> 24){
+                        const timeEstimated = `Temps estimé : <span>`+ heures % 24 +` jours</span> </label>`;
+                    }
                     const carbone = (mode.carbone * distanceDernierKm.distance).toFixed(2);
-    
                     const modeElement = document.createElement("div");
                     modeElement.className = "mode-transport";
-                    modeElement.innerHTML = `
-                        <label>
-                            <input type="radio" name="transport" value="${mode.type}">
-                            <strong>${mode.type}</strong><br>
-                            Distance : <span>${distanceDernierKm.distance.toFixed(2)}</span> km<br>
-                            Empreinte carbone : <span>${carbone}</span> gCO₂<br>
-                            Temps estimé : <span>${heures} heures ${minutes} minutes</span>
-                        </label>
+
+                    //Si le mode de transport n'est ni camionnette ni moto, alors on met en exergue l'empreinte carbonne
+                    const addGreen = '';
+                    if (mode.type != 'Camionnette' && mode.type != 'Moto'){
+                        addGreen = ' style="color: green; font-weight: bold;"';
+                    }
+                    toInsert = `
+                            <label>
+                                <input type="radio" name="transport" value="${mode.type}">
+                                <strong>${mode.type}</strong><br>
+                                Distance : <span>${distanceDernierKm.distance.toFixed(2)}</span> km<br>
+                                Empreinte carbone : <span ${addGreen}>${carbone}</span> gCO₂<br>
                     `;
+                    modeElement.innerHTML = toInsert+timeEstimated;
                     transportContainer.appendChild(modeElement);
                 });
             } else {
