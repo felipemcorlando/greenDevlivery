@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const API_KEY = ""; // Remplacez par votre clé API Google Maps.
+    const API_KEY = "AIzaSyBUb7Ee7AkGvlY75uxBxTGecHCpDoaaZok"; // Remplacez par votre clé API Google Maps.
 
     // Adresses des centres de départ
     const centres = {
@@ -82,18 +82,25 @@ document.addEventListener("DOMContentLoaded", function () {
             const carboneTrainTotal = carboneTrain * distance; // Empreinte carbone totale pour le train
 
             const heuresTrain = Math.floor(tempsTrainHeures);
-            const minutesTrain = Math.round((tempsTrainHeures - heuresTrain) * 60);
 
             // Affichage des informations du trajet en train
             const elementTrain = document.createElement("div");
             elementTrain.className = "mode-transport";
+
+            //Si le temps est inférieur à 24, on affiche seulement les jours estimés
+            if (heuresTrain <= 24){
+                timeEstimated = `Temps estimé : <span>1 jour</span>`;
+            }else{
+                timeEstimated = `Temps estimé : <span>`+ heuresTrain % 24 +` jours</span>`;
+            }
+
             elementTrain.innerHTML = `
                 <div>
                     <strong>Train</strong> : Livraison jusqu'à la gare la plus proche (${gareProche.nom})<br>
                     Distance en train : <span>${distance.toFixed(2)}</span> km<br>
-                    Temps estimé en train : <span>${heuresTrain} heures ${minutesTrain} minutes</span><br>
-                    Empreinte carbone du train : <span>${carboneTrainTotal.toFixed(2)}</span> gCO₂<br>
+                    Empreinte carbone du train : <span style="color: green; font-weight: bold;">${carboneTrainTotal.toFixed(2)}</span> gCO₂<br>
                     Gare située à : <span>${distanceDernierKm.distance.toFixed(2)}</span> km de votre adresse.<br>
+                    ${timeEstimated}<br>
                 </div>
                 <p>Choisissez un mode de transport pour les derniers kilomètres :</p>
             `;
@@ -110,25 +117,26 @@ document.addEventListener("DOMContentLoaded", function () {
     
                     const tempsDernierKmHeures = distanceDernierKm.distance / mode.vitesse;
                     const heures = Math.floor(tempsDernierKmHeures);
-                    
+                    var timeEstimated = ''
+
                     //Si le temps est inférieur à 24, on affiche seulement les jours estimés
                     if (heures <= 24){
-                        const timeEstimated = `Temps estimé : <span>1 jour</span> </label>`;
-                    }else if(heures >> 24){
-                        const timeEstimated = `Temps estimé : <span>`+ heures % 24 +` jours</span> </label>`;
+                        timeEstimated = `Temps estimé : <span>1 jour</span> </label>`;
+                    }else{
+                        timeEstimated = `Temps estimé : <span>`+ heures % 24 +` jours</span> </label>`;
                     }
                     const carbone = (mode.carbone * distanceDernierKm.distance).toFixed(2);
                     const modeElement = document.createElement("div");
                     modeElement.className = "mode-transport";
 
                     //Si le mode de transport n'est ni camionnette ni moto, alors on met en exergue l'empreinte carbonne
-                    const addGreen = '';
+                    var addGreen = '';
                     if (mode.type != 'Camionnette' && mode.type != 'Moto'){
                         addGreen = ' style="color: green; font-weight: bold;"';
                     }
                     toInsert = `
                             <label>
-                                <input type="radio" name="transport" value="${mode.type}">
+                                <input type="radio" name="transport" value="${mode.type}" onclick="summerize(${carbone}, ${carboneTrainTotal});>
                                 <strong>${mode.type}</strong><br>
                                 Distance : <span>${distanceDernierKm.distance.toFixed(2)}</span> km<br>
                                 Empreinte carbone : <span ${addGreen}>${carbone}</span> gCO₂<br>
@@ -155,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     element.className = "mode-transport";
                     element.innerHTML = `
                         <label>
-                            <input type="radio" name="transport" value="${mode.type}">
+                            <input type="radio" name="transport" value="${mode.type}" onclick="summerize(${carbone});">
                             <strong>${mode.type}</strong><br>
                             Distance : <span>${distance.toFixed(2)}</span> km<br>
                             Empreinte carbone : <span>${carbone}</span> gCO₂<br>
