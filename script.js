@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const API_KEY = "AIzaSyBUb7Ee7AkGvlY75uxBxTGecHCpDoaaZok"; // Remplacez par votre clé API Google Maps.
+    const API_KEY = ""; // Remplacez par votre clé API Google Maps.
 
     // Adresses des centres de départ
     const centres = {
@@ -131,12 +131,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     //Si le mode de transport n'est ni camionnette ni moto, alors on met en exergue l'empreinte carbonne
                     var addGreen = '';
+                    
+                    
                     if (mode.type != 'Camionnette' && mode.type != 'Moto'){
-                        addGreen = ' style="color: green; font-weight: bold;"';
+                        addGreen = 'style="color: green; font-weight: bold;"';
                     }
-                    toInsert = `
+                    var toInsert = `
                             <label>
-                                <input type="radio" name="transport" value="${mode.type}" onclick="summerize(${carbone}, ${carboneTrainTotal});>
+                                <input type="radio" name="transport" value="${mode.type}" onclick="summerize(${carbone}, ${carboneTrainTotal})";>
                                 <strong>${mode.type}</strong><br>
                                 Distance : <span>${distanceDernierKm.distance.toFixed(2)}</span> km<br>
                                 Empreinte carbone : <span ${addGreen}>${carbone}</span> gCO₂<br>

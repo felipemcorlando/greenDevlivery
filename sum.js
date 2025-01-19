@@ -3,5 +3,5 @@
 
 function summerize(co2Mode, co2Train = 0){
     var co2Tot = co2Mode + co2Train
-    
+    alert('Cette livraison va produire : '+Math.floor(co2Tot)+' gCO₂.')
 }
