@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const API_KEY = ""; // Remplacez par votre clé API Google Maps.
+    const API_KEY = "AIzaSyBUb7Ee7AkGvlY75uxBxTGecHCpDoaaZok"; // Remplacez par votre clé API Google Maps.
 
     // Adresses des centres de départ
     const centres = {
