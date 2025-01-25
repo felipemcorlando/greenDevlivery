@@ -9,12 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Modes de transport avec empreintes carbone (gCO2/km) et vitesses moyennes (km/h)
     const modes = [
-        { type: "Camionnette", carbone: 200, vitesse: 50 },
-        { type: "Moto", carbone: 87, vitesse: 60 },
-        { type: "Vélo", carbone: 0, vitesse: 20 },
-        { type: "Robot autonome", carbone: 30, vitesse: 15 },
+        { type: "Camionnette", carbone: 200, vitesse: 50 }, // https://tolv-systems.com/actualite/emissions-ges-utilitaires#:~:text=Par%20kilom%C3%A8tre%20parcouru%2C%20un%20poids,CO2%20par%20km%20en%20moyenne
+        { type: "Moto", carbone: 87, vitesse: 60 }, // https://youmatter.world/fr/categorie-economie-business/moto-scooter-impact-ecologique/#:~:text=Les%20r%C3%A9sultats%20montraient%20que%20les,130%20g%20de%20CO2%2Fkm
+        { type: "Vélo", carbone: 0, vitesse: 20 }, 
         { type: "Piéton", carbone: 0, vitesse: 5 },
-        { type: "Drone", carbone: 20, vitesse: 70 },
     ];
 
     const transportContainer = document.getElementById("modes-transport");
@@ -77,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
             // Calcul du temps et de l'empreinte carbone du trajet en train
             const vitesseTrain = 300; // Vitesse moyenne du train en km/h
-            const carboneTrain = 1.7; // Empreinte carbone du train en gCO₂/km
+            const carboneTrain = 1.7; // Empreinte carbone du train en gCO₂/km https://blog.helios.do/calculer-empreinte-carbone-train
             const tempsTrainHeures = distance / vitesseTrain; // Temps en heures
             const carboneTrainTotal = carboneTrain * distance; // Empreinte carbone totale pour le train
 

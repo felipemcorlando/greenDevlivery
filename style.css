@@ -440,10 +440,6 @@ body {
 
 }
 
-.card-nested {
-
-}
-
 .card-nested p{
     margin: 5px;
 }
@@ -528,9 +524,7 @@ body {
 .today_deals_product_item p{
     justify-self: flex-end;
 }
-.discount_Contaienr{
-    /* border: 2px solid red; */
-}
+
 .discount_Contaienr a{
     padding: 5px 10px;
     font-size: 14px;
