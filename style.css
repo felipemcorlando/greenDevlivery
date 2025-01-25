@@ -31,6 +31,7 @@ body {
 .container-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 /**logo***/
@@ -672,4 +673,9 @@ footer {
   .flexjustepourflex {
     display: flex;
     justify-content: center;
+  }
+
+  .redircalculs a {
+    color: inherit;
+    font-weight: bold;
   }
