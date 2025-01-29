@@ -158,18 +158,34 @@ document.addEventListener("DOMContentLoaded", function () {
                     const heures = Math.floor(tempsTotalHeures);
                     const minutes = Math.round((tempsTotalHeures - heures) * 60);
                     const carbone = (mode.carbone * distance).toFixed(2);
-    
+                    var timeEstimated = ''
+
+                    //Si le temps est inférieur à 24, on affiche seulement les jours estimés
+                    if (heures <= 24){
+                        timeEstimated = `Temps estimé : <span>1 jour</span> </label>`;
+                    }else{
+                        timeEstimated = `Temps estimé : <span>`+ heures % 24 +` jours</span> </label>`;
+                    }
+
+
+                    //Si le mode de transport n'est ni camionnette ni moto, alors on met en exergue l'empreinte carbonne
+                    var addGreen = '';
+                    
+
+                    if (mode.type != 'Camionnette' && mode.type != 'Moto'){
+                        addGreen = 'style="color: green; font-weight: bold;"';
+                    }
                     const element = document.createElement("div");
                     element.className = "mode-transport";
-                    element.innerHTML = `
+                    var toInsert = `
                         <label>
                             <input type="radio" name="transport" value="${mode.type}" onclick="summerize(${carbone});">
                             <strong>${mode.type}</strong><br>
                             Distance : <span>${distance.toFixed(2)}</span> km<br>
-                            Empreinte carbone : <span>${carbone}</span> gCO₂<br>
-                            Temps estimé : <span>${heures} heures ${minutes} minutes</span>
+                            Empreinte carbone : <span ${addGreen}>${carbone}</span> gCO₂<br>
                         </label>
                     `;
+                    element.innerHTML = toInsert+timeEstimated;
                     transportContainer.appendChild(element);
                 });
             }
