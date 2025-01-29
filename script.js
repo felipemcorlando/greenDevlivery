@@ -109,8 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Appliquer des conditions pour exclure certains modes de transport
                     if (mode.type === "Piéton" && distanceDernierKm.distance > 5) return;
                     if (mode.type === "Vélo" && distanceDernierKm.distance > 10) return;
-                    if (mode.type === "Robot autonome" && distanceDernierKm.distance > 7) return;
-                    if (mode.type === "Drone" && distanceDernierKm.distance > 20) return;
                     if (mode.type === "Moto" && distanceDernierKm.distance > 70) return;
     
                     const tempsDernierKmHeures = distanceDernierKm.distance / mode.vitesse;
@@ -150,8 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Appliquer des conditions pour exclure certains modes de transport
                     if (mode.type === "Piéton" && distance > 5) return;
                     if (mode.type === "Vélo" && distance > 10) return;
-                    if (mode.type === "Robot autonome" && distance > 7) return;
-                    if (mode.type === "Drone" && distance > 20) return;
                     if (mode.type === "Moto" && distance > 70) return;
     
                     const tempsTotalHeures = distance / mode.vitesse;
